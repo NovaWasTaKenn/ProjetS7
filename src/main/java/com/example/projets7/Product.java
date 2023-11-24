@@ -9,6 +9,7 @@ public abstract class Product implements Discount,Comparable<Product>{
 
   static int nb=0;
   static double income=0;
+  static double cost=0;
 
   public Product(String name, double price, int nbItems) {
     this.id=++nb;
@@ -71,6 +72,7 @@ public abstract class Product implements Discount,Comparable<Product>{
   public void purchase(int nbItems)throws IllegalArgumentException{
     if(nbItems>0){
       this.setNbItems(this.nbItems+nbItems);
+      cost+=nbItems*this.price;
       System.out.println("Purchase OK !");
     }else throw new IllegalArgumentException("Purchase with negative number !!");
   }
