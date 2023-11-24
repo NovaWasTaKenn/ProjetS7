@@ -1,6 +1,7 @@
 package com.example.projets7;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Company {
 

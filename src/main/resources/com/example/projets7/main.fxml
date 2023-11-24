@@ -32,21 +32,40 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Label?>
+<HBox fx:id="hbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="400.0" prefWidth="600.0"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.projets7.MainController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+         </padding>
          <children>
-            <Button mnemonicParsing="false" text="Company" />
-            <Button mnemonicParsing="false" text="Products" />
-            <Button mnemonicParsing="false" text="Stock" />
+            <Button mnemonicParsing="false" text="Company" onAction="#onCompanyButtonClick"/>
+            <Button mnemonicParsing="false" text="Products" onAction="#onProductsButtonClick"/>
+            <Button mnemonicParsing="false" text="Stock" onAction="#onStockButtonClick"/>
          </children>
       </VBox>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+
+      <AnchorPane prefHeight="400.0" prefWidth="506.0">
+         <HBox.margin>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="30.0" />
+         </HBox.margin>
+         <padding>
+            <Insets left="30.0" />
+         </padding>
+
+         <Label fx:id="mainText" />
+      </AnchorPane>
    </children>
 </HBox>
