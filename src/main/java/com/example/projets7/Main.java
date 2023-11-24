@@ -5,6 +5,14 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Main {
+    public static void Test(){
+        Product p1 = new Shoes("s1", 10.0, 10, 38);
+        Product p2 = new Clothes("c1", 20.0, 20, 36);
+        p2.applyDiscount();
+        System.out.println(p2);
+        p2.stopDiscount();
+        System.out.println(p2);
+    }
     public static void main(String[] args) {
         try {
             Product p1 = new Shoes("s1", 10.0, 10, 38);
@@ -43,6 +51,8 @@ public class Main {
         } catch (IllegalArgumentException var8) {
             System.out.println(var8.getMessage());
         }
+
+    }
 
     }
 }

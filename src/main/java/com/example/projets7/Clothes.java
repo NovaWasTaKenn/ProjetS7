@@ -30,6 +30,7 @@ public class Clothes extends Product{
   public void applyDiscount() {
     this.setPrice(this.getPrice()*(1-DISCOUNT_CLOTHES));
   }
+  public void stopDiscount(){this.setPrice(this.getPrice()/(1-DISCOUNT_CLOTHES));}
 
 
 }
