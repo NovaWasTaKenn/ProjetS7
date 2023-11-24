@@ -16,4 +16,8 @@ public class Accessories extends Product{
     this.setPrice(this.getPrice()*(1-DISCOUNT_ACCESSORIES));
 
   }
+  @Override
+  public void stopDiscount(){
+    this.setPrice(this.getPrice()/(1-DISCOUNT_ACCESSORIES));
+  }
 }

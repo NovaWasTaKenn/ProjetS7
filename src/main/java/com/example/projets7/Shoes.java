@@ -29,4 +29,8 @@ public class Shoes extends Product {
     this.setPrice(this.getPrice()*(1-DISCOUNT_SHOES));
 
   }
+  @Override
+  public void stopDiscount(){
+    this.setPrice(this.getPrice()/(1-DISCOUNT_SHOES));
+  }
 }
