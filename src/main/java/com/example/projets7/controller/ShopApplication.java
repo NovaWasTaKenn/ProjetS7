@@ -1,4 +1,4 @@
-package com.example.projets7;
+package com.example.projets7.controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

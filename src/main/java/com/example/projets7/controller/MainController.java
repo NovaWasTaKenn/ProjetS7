@@ -1,4 +1,4 @@
-package com.example.projets7;
+package com.example.projets7.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +20,7 @@ public class MainController {
 
     @FXML
     protected void onCompanyButtonClick() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("listView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("stockList.fxml"));
         rightAnchorPane = loader.load();
 
         // assuming the existing pane is the second one in the split pane:

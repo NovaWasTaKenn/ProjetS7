@@ -1,4 +1,4 @@
-package com.example.projets7;
+package com.example.projets7.entity;
 
 public class Shoes extends Product {
 

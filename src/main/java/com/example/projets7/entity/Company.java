@@ -1,4 +1,4 @@
-package com.example.projets7;
+package com.example.projets7.entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +10,7 @@ public class Company {
     static double globalCosts = 0;
     static double capital = 0;
     static List<Product> listProduct=new ArrayList<>();
-    static HashMap<String, Integer> stock = new HashMap<String, Integer>();
+        static HashMap<String, Integer> stock = new HashMap<String, Integer>();
     static void getglobalIncome(){
         for(Product q : listProduct){
             globalIncome+=q.income;

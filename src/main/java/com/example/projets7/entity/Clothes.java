@@ -1,8 +1,8 @@
-package com.example.projets7;
+package com.example.projets7.entity;
 
-public class Clothes extends Product{
+public class Clothes extends Product {
 
-  private int size;
+    private int size;
 
   public Clothes(String name, double price, int nbItems, int size) {
     super(name, price, nbItems);

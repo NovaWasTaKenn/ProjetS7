@@ -1,4 +1,5 @@
-package com.example.projets7;
+package com.example.projets7.entity;
+
 
 public abstract class Product implements Discount,Comparable<Product>{
 
