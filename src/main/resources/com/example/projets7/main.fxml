@@ -41,10 +41,12 @@
 
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.Label?>
-<HBox fx:id="hbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+<HBox fx:id="hbox"
+      minHeight="600" minWidth="900"
       prefHeight="600.0" prefWidth="900.0"
       xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.projets7.controller.MainController">
+      fx:controller="com.example.projets7.controller.MainController"
+      stylesheets="@styles.css">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="800.0">
          <padding>

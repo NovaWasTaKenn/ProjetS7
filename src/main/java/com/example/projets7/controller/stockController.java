@@ -25,6 +25,9 @@ public class stockController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+
         ObservableList<String> items = FXCollections.observableArrayList("Item 1", "Item 2", "Item 3");
         stockLV.setItems(items);
         stockLV.setEditable(true);

@@ -1,0 +1,19 @@
+#anchorPane {
+    -fx-background-color: #f4f4f4; /* Light gray background color */
+}
+
+#listView {
+    -fx-background-color: #ffffff; /* White background color */
+    -fx-border-color: #cccccc; /* Light gray border color */
+    -fx-border-width: 1px;
+}
+
+#button1, #button2 {
+    -fx-background-color: #4CAF50; /* Green background color */
+    -fx-text-fill: #ffffff; /* White text color */
+    -fx-font-weight: bold;
+}
+
+#button1:hover, #button2:hover {
+    -fx-background-color: #45a049; /* Darker green on hover */
+}

@@ -6,5 +6,7 @@ public interface Discount {
   double DISCOUNT_ACCESSORIES= 0.5;
 
   public void applyDiscount();
+
   public void stopDiscount();
+
 }
