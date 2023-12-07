@@ -1,8 +1,11 @@
-package com.example.projets7;
+package com.example.projets7.controller;
+
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.example.projets7.entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,8 +36,8 @@ public class HelloControllerAdam implements Initializable {
     private TableView<Product> Table;
 
     ObservableList<Product> lt= FXCollections.observableArrayList(
-            new Clothes("Chaussette", 12.6, 35, 36),
-            new Clothes("Clavier", 65.8, 12, 45)
+            new Clothes("Chaussette", 12.6,0,0, 35, 36),
+            new Clothes("Clavier", 65.8,0,0, 12, 45)
     );
 
     @Override
@@ -82,7 +85,7 @@ public class HelloControllerAdam implements Initializable {
     @FXML
     void OnAdd(ActionEvent event) throws IOException {
         Clothes t = new Clothes(tfname.getText(),Double.parseDouble(tfprice.getText()),
-                Integer.parseInt(tfstock.getText()),Integer.parseInt(tfsize.getText()));
+                0,0,Integer.parseInt(tfstock.getText()),Integer.parseInt(tfsize.getText()));
         lt.add(t);
         Table.setItems(lt);
     }

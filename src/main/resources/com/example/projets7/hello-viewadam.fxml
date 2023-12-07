@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projets7.HelloControllerAdam">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projets7.controller.HelloControllerAdam">
     <Button fx:id="button_delete" layoutX="674.0" layoutY="422.0" mnemonicParsing="false" onAction="#OnDelete" text="Delete" />
     <Button fx:id="button_add" layoutX="609.0" layoutY="374.0" mnemonicParsing="false" onAction="#OnAdd" text="Add Clothe" />
     <TextField fx:id="search" layoutX="92.0" layoutY="34.0" prefHeight="26.0" prefWidth="566.0" promptText="Search By Name" />
