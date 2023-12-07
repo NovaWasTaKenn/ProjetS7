@@ -28,7 +28,7 @@ public class Product implements Discount, Comparable<Product> {
     setPrice(price);
     this.income = income;
     this.cost = cost;
-    this.nbItems = nbItems;
+    setNbItems(nbItems);
   }
 
   public Product(String name, double price, double income, double cost, int nbItems) {
@@ -37,7 +37,7 @@ public class Product implements Discount, Comparable<Product> {
     setPrice(price);
     this.income = income;
     this.cost = cost;
-    this.nbItems = nbItems;
+    setNbItems(nbItems);
   }
 
 
@@ -87,8 +87,10 @@ public class Product implements Discount, Comparable<Product> {
     return nbItems;
   }
 
-  public void setNbItems(int nbItems) {
-    this.nbItems = nbItems;
+  public void setNbItems(int nbItems) throws IllegalArgumentException {
+    if (nbItems >= 0) {
+      this.nbItems = nbItems;
+    } else throw new IllegalArgumentException("Stock is negative");
   }
 
 

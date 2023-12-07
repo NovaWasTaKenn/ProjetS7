@@ -56,49 +56,78 @@ public class HelloControllerAdam implements Initializable {
                 )));
     }
     @FXML
-    private Button button_add;
+    private Button add_accessory;
 
+    @FXML
+    private Button add_clothe;
+
+    @FXML
+    private Button add_shoe;
+
+    @FXML
+    private TextField aname;
+
+    @FXML
+    private TextField aprice;
+
+    @FXML
+    private TextField astock;
 
     @FXML
     private Button button_delete;
 
     @FXML
-    private Button button_search;
+    private TextField cname;
+
+    @FXML
+    private TextField cprice;
+
+    @FXML
+    private TextField csize;
+
+    @FXML
+    private TextField cstock;
+    @FXML
+    private TextField sname;
+
+    @FXML
+    private TextField sprice;
+
+    @FXML
+    private TextField ssize;
+
+    @FXML
+    private TextField sstock;
 
     @FXML
     private TextField search;
-    @FXML
-    private TextField tfname;
 
     @FXML
-    private TextField tfprice;
-
-    @FXML
-    private TextField tfsize;
-
-    @FXML
-    private TextField tfstock;
-
-    @FXML
-    private Label ws;
-
-    @FXML
-    void OnAdd(ActionEvent event) throws IOException {
-        Clothes t = new Clothes(tfname.getText(),Double.parseDouble(tfprice.getText()),
-                0,0,Integer.parseInt(tfstock.getText()),Integer.parseInt(tfsize.getText()));
-        lt.add(t);
+    void AddClothe(ActionEvent event) throws IOException {
+        Clothes c = new Clothes(cname.getText(),Double.parseDouble(cprice.getText()),
+                0,0,Integer.parseInt(cstock.getText()),Integer.parseInt(csize.getText()));
+        lt.add(c);
         Table.setItems(lt);
     }
-
+    @FXML
+    void AddShoe(ActionEvent event) throws IOException {
+        Shoes s = new Shoes(sname.getText(),Double.parseDouble(sprice.getText()),
+                0,0,Integer.parseInt(sstock.getText()),Integer.parseInt(ssize.getText()));
+        lt.add(s);
+        Table.setItems(lt);
+    }
+    @FXML
+    void AddAccessory(ActionEvent event) throws IOException {
+        Accessories a = new Accessories(aname.getText(),Double.parseDouble(aprice.getText()),
+                0,0,Integer.parseInt(astock.getText()));
+        lt.add(a);
+        Table.setItems(lt);
+    }
     @FXML
     void OnDelete(ActionEvent event) {
         Product selected=Table.getSelectionModel().getSelectedItem();
         lt.remove(selected);
     }
 
-    @FXML
-    void OnSearch(ActionEvent event) {
-
-    }
 
 }
