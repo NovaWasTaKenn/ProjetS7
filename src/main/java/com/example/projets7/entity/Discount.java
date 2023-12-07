@@ -1,4 +1,4 @@
-package com.example.projets7;
+package com.example.projets7.entity;
 
 public interface Discount {
   double DISCOUNT_CLOTHES=0.3;
@@ -6,5 +6,7 @@ public interface Discount {
   double DISCOUNT_ACCESSORIES= 0.5;
 
   public void applyDiscount();
+
   public void stopDiscount();
+
 }

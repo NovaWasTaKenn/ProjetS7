@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchorPane"
+            stylesheets="@styles.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.projets7.controller.ProductController">
+
+    <ListView fx:id="listView" layoutX="10" layoutY="10" prefWidth="200"/>
+    <Button fx:id="button1" layoutX="220" layoutY="10" text="Button 1" onAction="#handleButton1"/>
+    <Button fx:id="button2" layoutX="330" layoutY="10" text="Button 2" onAction="#handleButton2"/>
+
+</AnchorPane>
+
