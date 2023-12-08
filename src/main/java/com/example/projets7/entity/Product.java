@@ -33,7 +33,6 @@ public class Product implements Discount, Comparable<Product> {
 
   public Product(String name, double price, double income, double cost, int nbItems) {
     this.name = name;
-    //this.price = price;
     setPrice(price);
     this.income = income;
     this.cost = cost;
