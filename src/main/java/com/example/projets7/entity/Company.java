@@ -67,7 +67,7 @@ public class Company {
 
 
     public static void getCompanyCapital() {
-        capital = globalIncome - globalCosts;
+        capital += globalIncome - globalCosts;
         System.out.println("The capital of the company is " + capital + " €");
     }
 

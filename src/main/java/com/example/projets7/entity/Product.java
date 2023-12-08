@@ -17,6 +17,7 @@ public class Product implements Discount, Comparable<Product> {
   private int nbItems;
   private double income;
   private double cost;
+  private boolean discount;
 
   // Empty constructor
   public Product() {
@@ -29,6 +30,7 @@ public class Product implements Discount, Comparable<Product> {
     this.income = income;
     this.cost = cost;
     setNbItems(nbItems);
+    this.discount=false;
   }
 
   public Product(String name, double price, double income, double cost, int nbItems) {
@@ -37,6 +39,7 @@ public class Product implements Discount, Comparable<Product> {
     this.income = income;
     this.cost = cost;
     setNbItems(nbItems);
+    this.discount=false;
   }
 
 
@@ -54,6 +57,13 @@ public class Product implements Discount, Comparable<Product> {
 
   public void setName(String name) {
     this.name = name;
+  }
+  public boolean getDiscount() {
+    return discount;
+  }
+
+  public void setDiscount(boolean discount) {
+    this.discount = discount;
   }
 
   public double getIncome() {

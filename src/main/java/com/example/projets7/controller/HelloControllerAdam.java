@@ -58,11 +58,6 @@ public class HelloControllerAdam implements Initializable {
                 p.setPrice(event.getNewValue());
         });
         nbItems.setCellValueFactory(new PropertyValueFactory<Product, Integer>("nbItems"));
-        nbItems.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-        nbItems.setOnEditCommit(event ->  {
-                Product p = event.getRowValue();
-                p.setNbItems(event.getNewValue());
-        });
 
         Table.setItems(lt);
         Table.setItems(lt.filtered(Product ->
@@ -72,7 +67,7 @@ public class HelloControllerAdam implements Initializable {
                 Table.setItems(lt.filtered(Product ->
                         Product.getName().toLowerCase().contains(newValue.toLowerCase())
                 )));
-        sizeitems.setText(lt.size() + " Items");
+        NbSize();
     }
 
     @FXML
@@ -94,19 +89,29 @@ public class HelloControllerAdam implements Initializable {
     private TextField astock;
 
     @FXML
-    private TextField mname;
+    private Label ccapital;
 
     @FXML
-    private TextField mprice;
+    private Label ccost;
+
+    @FXML
+    private Label cincome;
+
+    @FXML
+    private TextField nsell;
+
+    @FXML
+    private TextField nbuy;
 
     @FXML
     private Label sizeitems;
 
     @FXML
-    private TextField mstock;
-
-    @FXML
     private Button button_delete;
+    @FXML
+    private Button stop_discount;
+    @FXML
+    private Button apply_discount;
 
     @FXML
     private TextField cname;
@@ -134,6 +139,19 @@ public class HelloControllerAdam implements Initializable {
     @FXML
     private TextField search;
 
+    void NbSize(){
+        if (lt.size()<=1){
+            sizeitems.setText(lt.size()+" Item");
+        }
+        else {
+            sizeitems.setText(lt.size() + " Items");
+        }
+    }
+    void DisplayListe(){
+        for (Product p :lt){
+            System.out.println(p);
+        }
+    }
 
 
     @FXML
@@ -141,17 +159,15 @@ public class HelloControllerAdam implements Initializable {
         Clothes c = new Clothes(cname.getText(), Double.parseDouble(cprice.getText()),
                 0, 0, Integer.parseInt(cstock.getText()), Integer.parseInt(csize.getText()));
         lt.add(c);
-        Table.setItems(lt);
-        sizeitems.setText(lt.size() + " Items");
+        NbSize();
     }
 
     @FXML
     void AddShoe(ActionEvent event) throws IOException {
-        Shoes s = new Shoes(sname.getText(), Double.parseDouble(sprice.getText()),
-                0, 0, Integer.parseInt(sstock.getText()), Integer.parseInt(ssize.getText()));
-        lt.add(s);
-        Table.setItems(lt);
-        sizeitems.setText(lt.size() + " Items");
+            Shoes s = new Shoes(sname.getText(), Double.parseDouble(sprice.getText()),
+                    0, 0, Integer.parseInt(sstock.getText()), Integer.parseInt(ssize.getText()));
+            lt.add(s);
+            NbSize();
     }
 
     @FXML
@@ -160,18 +176,46 @@ public class HelloControllerAdam implements Initializable {
                 0, 0, Integer.parseInt(astock.getText()));
         lt.add(a);
         //Table.setItems(lt);
-        sizeitems.setText(lt.size() + " Items");
+        NbSize();
     }
-
+    @FXML
+    void OnBuy(ActionEvent event) {
+        Product selected = Table.getSelectionModel().getSelectedItem();
+        if(Integer.parseInt(nbuy.getText())>0){
+            selected.setNbItems(selected.getNbItems()+Integer.parseInt(nbuy.getText()));
+            Table.refresh();
+        }
+    }
+    @FXML
+    void OnSell(ActionEvent event) {
+        Product selected = Table.getSelectionModel().getSelectedItem();
+        if(selected.getNbItems()>=Integer.parseInt(nsell.getText())){
+            selected.setNbItems(selected.getNbItems()-Integer.parseInt(nsell.getText()));
+            Table.refresh();
+        }
+    }
     @FXML
     void OnDelete(ActionEvent event) {
         Product selected = Table.getSelectionModel().getSelectedItem();
         lt.remove(selected);
-        sizeitems.setText(lt.size() + " Items");
+        NbSize();
     }
 
-
-
-
+    @FXML
+    void OnApplyDiscount(ActionEvent event) {
+        Product selected = Table.getSelectionModel().getSelectedItem();
+        if(!selected.getDiscount()){
+            selected.applyDiscount();
+            Table.refresh();
+        }
+    }
+    @FXML
+    void OnStopDiscount(ActionEvent event) {
+        Product selected = Table.getSelectionModel().getSelectedItem();
+        if(selected.getDiscount()){
+            selected.stopDiscount();
+            Table.refresh();
+        }
+    }
 
 }

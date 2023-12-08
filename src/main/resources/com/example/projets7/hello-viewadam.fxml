@@ -33,4 +33,13 @@
    <TextField fx:id="astock" layoutX="309.0" layoutY="442.0" prefHeight="26.0" prefWidth="130.0" promptText="Stock" />
    <Button fx:id="add_accessory" layoutX="460.0" layoutY="442.0" mnemonicParsing="false" onAction="#AddAccessory" text="Add Accessory" />
    <Label fx:id="sizeitems" layoutX="545.0" layoutY="125.0" prefHeight="26.0" prefWidth="51.0" text=" Items" />
+   <Button fx:id="apply_discount" layoutX="121.0" layoutY="243.0" mnemonicParsing="false" onAction="#OnApplyDiscount" text="Apply Discount" />
+   <Button fx:id="stop_discount" layoutX="124.0" layoutY="280.0" mnemonicParsing="false" onAction="#OnStopDiscount" text="Stop Discount" />
+   <Label fx:id="ccapital" layoutX="224.0" layoutY="81.0" text="Capital" />
+   <Label fx:id="ccost" layoutX="363.0" layoutY="81.0" text="Cost" />
+   <Label fx:id="cincome" layoutX="484.0" layoutY="81.0" text="Income" />
+   <Button fx:id="b_buy" layoutX="273.0" layoutY="317.0" mnemonicParsing="false" onAction="#OnBuy" text="Buy" />
+   <Button fx:id="b_sell" layoutX="487.0" layoutY="317.0" mnemonicParsing="false" onAction="#OnSell" text="Sell" />
+   <TextField fx:id="nbuy" layoutX="230.0" layoutY="317.0" prefHeight="26.0" prefWidth="35.0" />
+   <TextField fx:id="nsell" layoutX="442.0" layoutY="317.0" prefHeight="26.0" prefWidth="35.0" />
 </AnchorPane>
