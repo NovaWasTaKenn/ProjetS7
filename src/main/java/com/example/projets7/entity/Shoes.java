@@ -39,12 +39,14 @@ public class Shoes extends Product {
 
   @Override
   public void applyDiscount() {
-    this.setPrice(this.getPrice() * (1 - DISCOUNT_SHOES));
+    this.setPrice(Math.round(this.getPrice() * (1 - DISCOUNT_SHOES)*1000.0)/1000.0);
+    this.setDiscount(true);
   }
 
   @Override
   public void stopDiscount() {
-    this.setPrice(this.getPrice() / (1 - DISCOUNT_SHOES));
+    this.setPrice(Math.round(this.getPrice() / (1 - DISCOUNT_SHOES)*1000.0)/1000.0);
+    this.setDiscount(false);
   }
 }
 

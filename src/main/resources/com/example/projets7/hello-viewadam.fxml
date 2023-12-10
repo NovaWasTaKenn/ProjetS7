@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projets7.controller.HelloControllerAdam">
+    <Button fx:id="button_delete" layoutX="539.0" layoutY="280.0" mnemonicParsing="false" onAction="#OnDelete" text="Delete" />
+    <Button fx:id="add_clothe" layoutX="609.0" layoutY="374.0" mnemonicParsing="false" onAction="#AddClothe" text="Add Clothe" />
+    <TextField fx:id="search" layoutX="91.0" layoutY="36.0" prefHeight="26.0" prefWidth="566.0" promptText="Search By Name" />
+    <TableView fx:id="Table" editable="true" layoutX="224.0" layoutY="125.0" prefHeight="182.0" prefWidth="302.0">
+        <columns>
+            <TableColumn fx:id="id" prefWidth="75.0" text="Id" />
+            <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="price" prefWidth="75.0" text="Price (€)" />
+            <TableColumn fx:id="nbItems" prefWidth="75.0" text="Stock" />
+        </columns>
+    </TableView>
+    <TextField fx:id="cname" layoutX="27.0" layoutY="374.0" prefHeight="26.0" prefWidth="130.0" promptText="Name" />
+    <TextField fx:id="cprice" layoutX="173.0" layoutY="374.0" prefHeight="26.0" prefWidth="130.0" promptText="Price (€)" />
+    <TextField fx:id="cstock" layoutX="310.0" layoutY="374.0" prefHeight="26.0" prefWidth="130.0" promptText="Stock" />
+    <TextField fx:id="csize" layoutX="460.0" layoutY="374.0" prefHeight="26.0" prefWidth="130.0" promptText="Size (36 - 50)" />
+   <TextField fx:id="sname" layoutX="27.0" layoutY="409.0" prefHeight="26.0" prefWidth="130.0" promptText="Name" />
+   <TextField fx:id="sprice" layoutX="173.0" layoutY="409.0" prefHeight="26.0" prefWidth="130.0" promptText="Price (€)" />
+   <TextField fx:id="sstock" layoutX="310.0" layoutY="408.0" prefHeight="26.0" prefWidth="130.0" promptText="Stock" />
+   <TextField fx:id="ssize" layoutX="460.0" layoutY="408.0" prefHeight="26.0" prefWidth="130.0" promptText="Size" />
+   <Button fx:id="add_shoe" layoutX="613.0" layoutY="408.0" mnemonicParsing="false" onAction="#AddShoe" text="Add Shoe" />
+   <TextField fx:id="aname" layoutX="27.0" layoutY="442.0" prefHeight="26.0" prefWidth="130.0" promptText="Name" />
+   <TextField fx:id="aprice" layoutX="173.0" layoutY="442.0" prefHeight="26.0" prefWidth="130.0" promptText="Price (€)" />
+   <TextField fx:id="astock" layoutX="309.0" layoutY="442.0" prefHeight="26.0" prefWidth="130.0" promptText="Stock" />
+   <Button fx:id="add_accessory" layoutX="460.0" layoutY="442.0" mnemonicParsing="false" onAction="#AddAccessory" text="Add Accessory" />
+   <Label fx:id="sizeitems" layoutX="545.0" layoutY="125.0" prefHeight="26.0" prefWidth="51.0" text=" Items" />
+   <Button fx:id="apply_discount" layoutX="121.0" layoutY="243.0" mnemonicParsing="false" onAction="#OnApplyDiscount" text="Apply Discount" />
+   <Button fx:id="stop_discount" layoutX="124.0" layoutY="280.0" mnemonicParsing="false" onAction="#OnStopDiscount" text="Stop Discount" />
+   <Label fx:id="ccapital" layoutX="224.0" layoutY="81.0" text="Capital" />
+   <Label fx:id="ccost" layoutX="363.0" layoutY="81.0" text="Cost" />
+   <Label fx:id="cincome" layoutX="484.0" layoutY="81.0" text="Income" />
+   <Button fx:id="b_buy" layoutX="273.0" layoutY="317.0" mnemonicParsing="false" onAction="#OnBuy" text="Buy" />
+   <Button fx:id="b_sell" layoutX="487.0" layoutY="317.0" mnemonicParsing="false" onAction="#OnSell" text="Sell" />
+   <TextField fx:id="nbuy" layoutX="230.0" layoutY="317.0" prefHeight="26.0" prefWidth="35.0" />
+   <TextField fx:id="nsell" layoutX="442.0" layoutY="317.0" prefHeight="26.0" prefWidth="35.0" />
+</AnchorPane>
