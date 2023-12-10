@@ -24,7 +24,7 @@ public class MainController {
         rightAnchorPane = loader.load();
 
         // assuming the existing pane is the second one in the split pane:
-        hbox.getChildren().add(rightAnchorPane) ;
+        hbox.getChildren().add(rightAnchorPane);
     }
 
     @FXML
