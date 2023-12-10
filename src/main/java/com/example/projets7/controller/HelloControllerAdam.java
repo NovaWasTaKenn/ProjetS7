@@ -3,12 +3,15 @@ package com.example.projets7.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.projets7.entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.paint.Color;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -36,6 +39,9 @@ public class HelloControllerAdam implements Initializable {
     @FXML
     private TableView<Product> Table;
 
+    Company1 c =new Company1();
+
+
     ObservableList<Product> lt = FXCollections.observableArrayList(
             new Clothes("Chaussette", 12.6, 0, 0, 35, 36),
             new Clothes("Clavier", 65.8, 0, 0, 12, 45)
@@ -43,6 +49,8 @@ public class HelloControllerAdam implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        c.lprod.add(new Clothes("Chaussette", 12.6, 0, 0, 35, 36));
+        c.lprod.add(new Clothes("Clavier", 65.8, 0, 0, 12, 45));
         id.setCellValueFactory(new PropertyValueFactory<Product, Integer>("id"));
         name.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
         name.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -67,6 +75,7 @@ public class HelloControllerAdam implements Initializable {
                 Table.setItems(lt.filtered(Product ->
                         Product.getName().toLowerCase().contains(newValue.toLowerCase())
                 )));
+        SetCompany();
         NbSize();
     }
 
@@ -147,8 +156,13 @@ public class HelloControllerAdam implements Initializable {
             sizeitems.setText(lt.size() + " Items");
         }
     }
+    void SetCompany(){
+        ccapital.setText("Capital : "+c.getCapital()+" €");
+        ccost.setText("Cost : "+c.getGlobalCost()+" €");
+        cincome.setText("Income : "+c.getGlobalIncome()+" €");
+    }
     void DisplayListe(){
-        for (Product p :lt){
+        for (Product p :c.lprod){
             System.out.println(p);
         }
     }
@@ -156,9 +170,10 @@ public class HelloControllerAdam implements Initializable {
 
     @FXML
     void AddClothe(ActionEvent event) throws IOException {
-        Clothes c = new Clothes(cname.getText(), Double.parseDouble(cprice.getText()),
+        Clothes cl = new Clothes(cname.getText(), Double.parseDouble(cprice.getText()),
                 0, 0, Integer.parseInt(cstock.getText()), Integer.parseInt(csize.getText()));
-        lt.add(c);
+        lt.add(cl);
+        c.lprod.add(cl);
         NbSize();
     }
 
@@ -167,6 +182,7 @@ public class HelloControllerAdam implements Initializable {
             Shoes s = new Shoes(sname.getText(), Double.parseDouble(sprice.getText()),
                     0, 0, Integer.parseInt(sstock.getText()), Integer.parseInt(ssize.getText()));
             lt.add(s);
+            c.lprod.add(s);
             NbSize();
     }
 
@@ -176,6 +192,7 @@ public class HelloControllerAdam implements Initializable {
                 0, 0, Integer.parseInt(astock.getText()));
         lt.add(a);
         //Table.setItems(lt);
+        c.lprod.add(a);
         NbSize();
     }
     @FXML
@@ -183,14 +200,20 @@ public class HelloControllerAdam implements Initializable {
         Product selected = Table.getSelectionModel().getSelectedItem();
         if(Integer.parseInt(nbuy.getText())>0){
             selected.setNbItems(selected.getNbItems()+Integer.parseInt(nbuy.getText()));
+            c.setGlobalCosts(c.getGlobalCost()+selected.getPrice()*Integer.parseInt(nbuy.getText()));
+            c.setCapital(c.getGlobalIncome()-c.getGlobalCost());
+            SetCompany();
             Table.refresh();
         }
     }
     @FXML
     void OnSell(ActionEvent event) {
         Product selected = Table.getSelectionModel().getSelectedItem();
-        if(selected.getNbItems()>=Integer.parseInt(nsell.getText())){
+        if(selected.getNbItems()>=Integer.parseInt(nsell.getText()) && !nsell.getText().isEmpty()){
             selected.setNbItems(selected.getNbItems()-Integer.parseInt(nsell.getText()));
+            c.setGlobalIncome(c.getGlobalIncome()+selected.getPrice()*Integer.parseInt(nsell.getText()));
+            c.setCapital(c.getGlobalIncome()-c.getGlobalCost());
+            SetCompany();
             Table.refresh();
         }
     }
@@ -198,6 +221,7 @@ public class HelloControllerAdam implements Initializable {
     void OnDelete(ActionEvent event) {
         Product selected = Table.getSelectionModel().getSelectedItem();
         lt.remove(selected);
+        c.lprod.remove(selected);
         NbSize();
     }
 
