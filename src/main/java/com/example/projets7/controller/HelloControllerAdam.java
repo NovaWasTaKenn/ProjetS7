@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import com.example.projets7.entity.*;
@@ -156,6 +157,11 @@ public class HelloControllerAdam implements Initializable {
             sizeitems.setText(lt.size() + " Items");
         }
     }
+    void NameEmpty(TextField a){
+        if(a.getText().trim().isEmpty()){
+            throw new IllegalArgumentException("First name is empty");
+        }
+    }
     void SetCompany(){
         ccapital.setText("Capital : "+c.getCapital()+" €");
         ccost.setText("Cost : "+c.getGlobalCost()+" €");
@@ -170,51 +176,142 @@ public class HelloControllerAdam implements Initializable {
 
     @FXML
     void AddClothe(ActionEvent event) throws IOException {
-        Clothes cl = new Clothes(cname.getText(), Double.parseDouble(cprice.getText()),
-                0, 0, Integer.parseInt(cstock.getText()), Integer.parseInt(csize.getText()));
-        lt.add(cl);
-        c.lprod.add(cl);
-        NbSize();
+        try {
+            NameEmpty(cname);
+            Clothes cl = new Clothes(cname.getText(), Double.parseDouble(cprice.getText()),
+                    0, 0, Integer.parseInt(cstock.getText()), Integer.parseInt(csize.getText()));
+            lt.add(cl);
+            c.lprod.add(cl);
+            cname.clear();
+            cprice.clear();
+            cstock.clear();
+            csize.clear();
+            NbSize();
+        }catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("An error occurred");
+            if (cname.getText().trim().isEmpty() || cprice.getText().trim().isEmpty()
+                    || cstock.getText().trim().isEmpty() || csize.getText().trim().isEmpty()){
+                alert.setContentText("Textfield is empty");
+            }
+            else{
+                alert.setContentText("Input variable is not a number");
+            }
+            alert.showAndWait();
+        }
     }
 
     @FXML
     void AddShoe(ActionEvent event) throws IOException {
+        try {
+            NameEmpty(sname);
+            System.out.println(sname.getText().equals(""));
             Shoes s = new Shoes(sname.getText(), Double.parseDouble(sprice.getText()),
                     0, 0, Integer.parseInt(sstock.getText()), Integer.parseInt(ssize.getText()));
             lt.add(s);
             c.lprod.add(s);
+            sname.clear();
+            sprice.clear();
+            sstock.clear();
+            ssize.clear();
             NbSize();
+        }catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("An error occurred");
+            if (sname.getText().trim().isEmpty() || sprice.getText().trim().isEmpty()
+                    || sstock.getText().trim().isEmpty() || ssize.getText().trim().isEmpty()){
+                alert.setContentText("Textfield is empty");
+            }
+            else{
+                alert.setContentText("Input variable is not a number");
+            }
+            alert.showAndWait();
+        }
     }
 
     @FXML
     void AddAccessory(ActionEvent event) throws IOException {
-        Accessories a = new Accessories(aname.getText(), Double.parseDouble(aprice.getText()),
-                0, 0, Integer.parseInt(astock.getText()));
-        lt.add(a);
-        //Table.setItems(lt);
-        c.lprod.add(a);
-        NbSize();
+        try {
+            NameEmpty(aname);
+            Accessories a = new Accessories(aname.getText(), Double.parseDouble(aprice.getText()),
+                    0, 0, Integer.parseInt(astock.getText()));
+            lt.add(a);
+            //Table.setItems(lt);
+            c.lprod.add(a);
+            aname.clear();
+            aprice.clear();
+            astock.clear();
+            NbSize();
+        }catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("An error occurred");
+            if (aname.getText().trim().isEmpty() || aprice.getText().trim().isEmpty()
+                    || astock.getText().trim().isEmpty()){
+                alert.setContentText("Textfield is empty");
+            }
+            else{
+                alert.setContentText("Input variable is not a number");
+            }
+            alert.showAndWait();
+        }
     }
     @FXML
     void OnBuy(ActionEvent event) {
-        Product selected = Table.getSelectionModel().getSelectedItem();
-        if(Integer.parseInt(nbuy.getText())>0){
-            selected.setNbItems(selected.getNbItems()+Integer.parseInt(nbuy.getText()));
-            c.setGlobalCosts(c.getGlobalCost()+selected.getPrice()*Integer.parseInt(nbuy.getText()));
-            c.setCapital(c.getGlobalIncome()-c.getGlobalCost());
-            SetCompany();
-            Table.refresh();
+        try {
+            Product selected = Table.getSelectionModel().getSelectedItem();
+            if (Integer.parseInt(nbuy.getText()) > 0) {
+                selected.setNbItems(selected.getNbItems() + Integer.parseInt(nbuy.getText()));
+                c.setGlobalCosts(c.getGlobalCost() + selected.getPrice() * Integer.parseInt(nbuy.getText()));
+                c.setCapital(c.getGlobalIncome() - c.getGlobalCost());
+                nbuy.clear();
+                SetCompany();
+                Table.refresh();
+            }
+        }catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("An error occurred");
+            if(Table.getSelectionModel().getSelectedItem()==null) {
+                alert.setContentText("No item has been selected");
+            }
+            else if (nbuy.getText().trim().isEmpty()){
+                alert.setContentText("Textfield is empty");
+            }
+            else{
+                alert.setContentText("Input variable is not a number");
+            }
+            alert.showAndWait();
         }
     }
     @FXML
     void OnSell(ActionEvent event) {
+        try{
         Product selected = Table.getSelectionModel().getSelectedItem();
         if(selected.getNbItems()>=Integer.parseInt(nsell.getText()) && !nsell.getText().isEmpty()){
             selected.setNbItems(selected.getNbItems()-Integer.parseInt(nsell.getText()));
             c.setGlobalIncome(c.getGlobalIncome()+selected.getPrice()*Integer.parseInt(nsell.getText()));
             c.setCapital(c.getGlobalIncome()-c.getGlobalCost());
+            nsell.clear();
             SetCompany();
             Table.refresh();
+            }
+        }catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("An error occurred");
+            if(Table.getSelectionModel().getSelectedItem()==null) {
+                alert.setContentText("No item has been selected");
+            }
+            else if (nsell.getText().trim().isEmpty()){
+                alert.setContentText("Textfield is empty");
+            }
+            else{
+                alert.setContentText("Input variable is not a number");
+            }
+            alert.showAndWait();
         }
     }
     @FXML
@@ -227,18 +324,34 @@ public class HelloControllerAdam implements Initializable {
 
     @FXML
     void OnApplyDiscount(ActionEvent event) {
-        Product selected = Table.getSelectionModel().getSelectedItem();
-        if(!selected.getDiscount()){
-            selected.applyDiscount();
-            Table.refresh();
+        try {
+            Product selected = Table.getSelectionModel().getSelectedItem();
+            if (!selected.getDiscount()) {
+                selected.applyDiscount();
+                Table.refresh();
+            }
+        }catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("An error occurred");
+            alert.setContentText("No item has been selected");
+            alert.showAndWait();
         }
     }
     @FXML
     void OnStopDiscount(ActionEvent event) {
-        Product selected = Table.getSelectionModel().getSelectedItem();
-        if(selected.getDiscount()){
-            selected.stopDiscount();
-            Table.refresh();
+        try {
+            Product selected = Table.getSelectionModel().getSelectedItem();
+            if (selected.getDiscount()) {
+                selected.stopDiscount();
+                Table.refresh();
+            }
+        }catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("An error occurred");
+            alert.setContentText("No item has been selected");
+            alert.showAndWait();
         }
     }
 
