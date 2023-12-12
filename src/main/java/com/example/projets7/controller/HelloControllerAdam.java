@@ -1,32 +1,19 @@
 package com.example.projets7.controller;
-
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
-
 import com.example.projets7.entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.paint.Color;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.MouseEvent;
 import javafx.util.converter.DoubleStringConverter;
-import javafx.util.converter.IntegerStringConverter;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class HelloControllerAdam implements Initializable {
-
-    @FXML
-    private TableColumn<Product, Integer> id;
 
     @FXML
     private TableColumn<Product, String> name;
@@ -38,10 +25,12 @@ public class HelloControllerAdam implements Initializable {
     private TableColumn<Product, Integer> nbItems;
 
     @FXML
+    private TableColumn<Product, Boolean> discount;
+
+    @FXML
     private TableView<Product> Table;
 
     Company1 c =new Company1();
-
 
     ObservableList<Product> lt = FXCollections.observableArrayList(
             new Clothes("Chaussette", 12.6, 0, 0, 35, 36),
@@ -50,9 +39,25 @@ public class HelloControllerAdam implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        discount.setCellValueFactory(new PropertyValueFactory<>("discount"));
+        discount.setCellFactory(column  -> new TableCell<>(){
+            @Override
+            public void updateItem(Boolean p, boolean empty){
+                super.updateItem(p, empty);
+                if (p == null || empty) {
+                    setStyle("");
+                } else {
+                        if(p){
+                            setStyle("-fx-background-color:   #23A861;");
+                        }
+                        else{
+                            setStyle("-fx-background-color:  #BA493F;");
+                        }
+                    }
+                }
+        });
         c.lprod.add(new Clothes("Chaussette", 12.6, 0, 0, 35, 36));
         c.lprod.add(new Clothes("Clavier", 65.8, 0, 0, 12, 45));
-        id.setCellValueFactory(new PropertyValueFactory<Product, Integer>("id"));
         name.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
         name.setCellFactory(TextFieldTableCell.forTableColumn());
         name.setOnEditCommit(event ->  {
@@ -80,14 +85,6 @@ public class HelloControllerAdam implements Initializable {
         NbSize();
     }
 
-    @FXML
-    private Button add_accessory;
-
-    @FXML
-    private Button add_clothe;
-
-    @FXML
-    private Button add_shoe;
 
     @FXML
     private TextField aname;
@@ -115,13 +112,6 @@ public class HelloControllerAdam implements Initializable {
 
     @FXML
     private Label sizeitems;
-
-    @FXML
-    private Button button_delete;
-    @FXML
-    private Button stop_discount;
-    @FXML
-    private Button apply_discount;
 
     @FXML
     private TextField cname;
@@ -173,7 +163,6 @@ public class HelloControllerAdam implements Initializable {
         }
     }
 
-
     @FXML
     void AddClothe(ActionEvent event) throws IOException {
         try {
@@ -206,7 +195,6 @@ public class HelloControllerAdam implements Initializable {
     void AddShoe(ActionEvent event) throws IOException {
         try {
             NameEmpty(sname);
-            System.out.println(sname.getText().equals(""));
             Shoes s = new Shoes(sname.getText(), Double.parseDouble(sprice.getText()),
                     0, 0, Integer.parseInt(sstock.getText()), Integer.parseInt(ssize.getText()));
             lt.add(s);
@@ -289,14 +277,14 @@ public class HelloControllerAdam implements Initializable {
     @FXML
     void OnSell(ActionEvent event) {
         try{
-        Product selected = Table.getSelectionModel().getSelectedItem();
-        if(selected.getNbItems()>=Integer.parseInt(nsell.getText()) && !nsell.getText().isEmpty()){
-            selected.setNbItems(selected.getNbItems()-Integer.parseInt(nsell.getText()));
-            c.setGlobalIncome(c.getGlobalIncome()+selected.getPrice()*Integer.parseInt(nsell.getText()));
-            c.setCapital(c.getGlobalIncome()-c.getGlobalCost());
-            nsell.clear();
-            SetCompany();
-            Table.refresh();
+            Product selected = Table.getSelectionModel().getSelectedItem();
+            if(selected.getNbItems()>=Integer.parseInt(nsell.getText()) && !nsell.getText().isEmpty()){
+                selected.setNbItems(selected.getNbItems()-Integer.parseInt(nsell.getText()));
+                c.setGlobalIncome(c.getGlobalIncome()+selected.getPrice()*Integer.parseInt(nsell.getText()));
+                c.setCapital(c.getGlobalIncome()-c.getGlobalCost());
+                nsell.clear();
+                SetCompany();
+                Table.refresh();
             }
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -328,6 +316,11 @@ public class HelloControllerAdam implements Initializable {
             Product selected = Table.getSelectionModel().getSelectedItem();
             if (!selected.getDiscount()) {
                 selected.applyDiscount();
+                for (Product p:c.lprod){
+                    if (selected.equals(p)){
+                        p.applyDiscount();
+                    }
+                }
                 Table.refresh();
             }
         }catch (Exception e){
@@ -344,6 +337,11 @@ public class HelloControllerAdam implements Initializable {
             Product selected = Table.getSelectionModel().getSelectedItem();
             if (selected.getDiscount()) {
                 selected.stopDiscount();
+                for (Product p:c.lprod){
+                    if (selected.equals(p)){
+                        p.stopDiscount();
+                    }
+                }
                 Table.refresh();
             }
         }catch (Exception e){

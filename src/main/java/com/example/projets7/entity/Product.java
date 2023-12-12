@@ -2,10 +2,13 @@ package com.example.projets7.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Comparator;
+import java.util.Objects;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name="product_table")
-public class Product implements Discount, Comparable<Product> {
+public class Product implements Discount {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -129,11 +132,10 @@ public class Product implements Discount, Comparable<Product> {
             '}';
   }
 
-  @Override
-  public int compareTo(Product o) {
-    return Double.compare(this.getPrice(), o.getPrice());
-  }
-
+public boolean equals(Product o){
+    return Double.compare(getPrice(),o.getPrice())==0
+            && getNbItems()==o.getNbItems() && getName().equals(o.getName());
+}
   @Override
   public void applyDiscount() {
 
