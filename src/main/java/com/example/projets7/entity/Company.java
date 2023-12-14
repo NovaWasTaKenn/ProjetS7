@@ -3,80 +3,60 @@ package com.example.projets7.entity;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 @Entity
 @Table(name="company_table")
 public class Company {
 
-    @Column(name="global_income")
-    private static double globalIncome = 0;
-
-    @Column(name="global_cost")
-    private static double globalCosts = 0;
-
-    private static double capital = 0;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    public Integer id;
 
     @Transient
-    private List<Product> listProduct;
-
-    // Empty constructor
-    public Company() {
+    public List<Product> lprod;
+    @Column(name = "Capital", nullable = true)
+    public double Capital;
+    @Column(name = "globalIncome", nullable = true)
+    public double globalIncome;
+    @Column(name = "globalCost", nullable = true)
+    public double globalCost;
+    public Company(){
+        this.lprod=new ArrayList<Product>();
+        this.Capital=20000;
+        this.globalIncome=0;
+        this.globalCost=0;
     }
-
-    // Getter for globalIncome
-    public static double getGlobalIncome() {
-        return globalIncome;
+    public  double getGlobalIncome() {
+        return this.globalIncome;
     }
 
     // Setter for globalIncome
-    public static void setGlobalIncome(double globalIncome) {
-        Company.globalIncome = globalIncome;
-    }
+    public void setGlobalIncome(double globalIncome) {
+        this.globalIncome = Math.round(globalIncome*1000.0)/1000.0;}
+
+
 
     // Getter for globalCosts
-    public static double getGlobalCosts() {
-        return globalCosts;
+    public  double getGlobalCost() {
+        return globalCost;
     }
 
     // Setter for globalCosts
-    public static void setGlobalCosts(double globalCosts) {
-        Company.globalCosts = globalCosts;
-    }
+    public void setGlobalCosts(double globalCosts) {
+        this.globalCost = Math.round(globalCosts*1000.0)/1000.0;}
+
+
 
     // Getter for capital
-    public static double getCapital() {
-        return capital;
+    public  double getCapital() {
+        return this.Capital;
     }
 
     // Setter for capital
-    public static void setCapital(double capital) {
-        Company.capital = capital;
-    }
+    public  void setCapital(double amount) {
+        this.Capital = Math.round((this.Capital+ amount)*1000.0)/1000.0;}
 
 
-
-
-    public static void getCompanyCapital() {
-        capital += globalIncome - globalCosts;
-        System.out.println("The capital of the company is " + capital + " €");
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
 }
-

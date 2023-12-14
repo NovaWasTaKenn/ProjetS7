@@ -12,8 +12,6 @@
     <Button fx:id="add_clothe" layoutX="609.0" layoutY="374.0" mnemonicParsing="false" onAction="#AddClothe" text="Add Clothe" />
     <TextField fx:id="search" layoutX="91.0" layoutY="36.0" prefHeight="26.0" prefWidth="566.0" promptText="Search By Name" />
 
-    <Button fx:id="saveBtn" layoutX="539.0" layoutY="200.0" mnemonicParsing="false" onAction="#OnSave" text="Save products" />
-
     <TableView fx:id="Table" editable="true" layoutX="224.0" layoutY="125.0" prefHeight="182.0" prefWidth="302.0">
         <columns>
             <TableColumn fx:id="name" minWidth="60.0" prefWidth="75.25" text="Name" />

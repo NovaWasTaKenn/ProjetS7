@@ -3,7 +3,7 @@ package com.example.projets7.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.projets7.entity.*;
@@ -16,16 +16,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.WindowEvent;
 import javafx.util.converter.DoubleStringConverter;
-import javafx.util.converter.IntegerStringConverter;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class HelloControllerAdam implements Initializable {
 
@@ -46,7 +39,7 @@ public class HelloControllerAdam implements Initializable {
 
     private Session hibernateSession;
 
-    Company1 c =new Company1();
+    private Company c = new Company();
 
     ObservableList<Product> lt = FXCollections.observableArrayList();
 
@@ -99,6 +92,20 @@ public class HelloControllerAdam implements Initializable {
             hibernateSession = HibernateUtil.getSessionFactory().openSession();
             lt.addAll(hibernateSession.createQuery("from Product", Product.class).list());
 
+            System.out.println(lt);
+
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+
+        try {
+
+            hibernateSession = HibernateUtil.getSessionFactory().openSession();
+            List<Company> companyList = hibernateSession.createQuery("from Company ", Company.class).list();
+            if(!companyList.isEmpty()){
+                c = companyList.getLast();
+            }
             System.out.println(lt);
 
         } catch (Exception e) {
@@ -219,9 +226,11 @@ public class HelloControllerAdam implements Initializable {
             cprice.clear();
             cstock.clear();
             csize.clear();
+
             transaction = hibernateSession.beginTransaction();
-            hibernateSession.persist(c);
+            hibernateSession.persist(cl);
             transaction.commit();
+
             NbSize();
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -235,7 +244,6 @@ public class HelloControllerAdam implements Initializable {
                 alert.setContentText("Input variable is not a number");
             }
 
-            transaction.rollback();
             alert.showAndWait();
         }
     }
@@ -272,7 +280,6 @@ public class HelloControllerAdam implements Initializable {
             }
             alert.showAndWait();
 
-            transaction.rollback();
         }
     }
 
@@ -308,7 +315,6 @@ public class HelloControllerAdam implements Initializable {
             }
             alert.showAndWait();
 
-            transaction.rollback();
         }
     }
     @FXML
@@ -319,11 +325,13 @@ public class HelloControllerAdam implements Initializable {
             if (Integer.parseInt(nbuy.getText()) > 0) {
                 selected.setNbItems(selected.getNbItems() + Integer.parseInt(nbuy.getText()));
                 c.setGlobalCosts(c.getGlobalCost() + selected.getPrice() * Integer.parseInt(nbuy.getText()));
-                c.setCapital(c.getGlobalIncome() - c.getGlobalCost());
+                c.setCapital(-selected.getPrice()*Integer.parseInt(nbuy.getText()));
                 nbuy.clear();
                 SetCompany();
                 transaction = hibernateSession.beginTransaction();
                 hibernateSession.merge(selected);
+                hibernateSession.evict(c);
+                hibernateSession.merge(c);
                 transaction.commit();
                 Table.refresh();
             }
@@ -341,8 +349,6 @@ public class HelloControllerAdam implements Initializable {
                 alert.setContentText("Input variable is not a number");
             }
 
-            transaction.rollback();
-
             alert.showAndWait();
         }
     }
@@ -354,17 +360,24 @@ public class HelloControllerAdam implements Initializable {
             if(selected.getNbItems()>=Integer.parseInt(nsell.getText()) && !nsell.getText().isEmpty()){
                 selected.setNbItems(selected.getNbItems()-Integer.parseInt(nsell.getText()));
                 c.setGlobalIncome(c.getGlobalIncome()+selected.getPrice()*Integer.parseInt(nsell.getText()));
-                c.setCapital(c.getGlobalIncome()-c.getGlobalCost());
+                c.setCapital(selected.getPrice()*Integer.parseInt(nsell.getText()));
+
+                System.out.println(c.getGlobalIncome()+";"+selected.getPrice()+";"+nsell.getText());
+                System.out.println(c.getGlobalCost());
+
                 nsell.clear();
                 SetCompany();
 
                 transaction = hibernateSession.beginTransaction();
                 hibernateSession.merge(selected);
+                hibernateSession.evict(c);
+                hibernateSession.merge(c);
                 transaction.commit();
 
                 Table.refresh();
             }
         }catch (Exception e){
+            System.out.println(e);
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("An error occurred");
@@ -375,26 +388,11 @@ public class HelloControllerAdam implements Initializable {
                 alert.setContentText("Textfield is empty");
             }
             else{
-                alert.setContentText("Input variable is not a number");
+                alert.setContentText(e.getMessage());
             }
-
-            transaction.rollback();
 
             alert.showAndWait();
         }
-    }
-
-    @FXML
-    void OnSave(ActionEvent event) {
-        try {
-
-            hibernateSession.flush();
-        }
-        catch (Exception e){
-            System.out.println(e);
-            e.printStackTrace();
-        }
-
     }
 
     @FXML
@@ -463,7 +461,6 @@ public class HelloControllerAdam implements Initializable {
             alert.setContentText("No item has been selected");
             alert.showAndWait();
 
-            transaction.rollback();
         }
     }
 
