@@ -13,10 +13,10 @@
     <TextField fx:id="search" layoutX="91.0" layoutY="36.0" prefHeight="26.0" prefWidth="566.0" promptText="Search By Name" />
     <TableView fx:id="Table" editable="true" layoutX="224.0" layoutY="125.0" prefHeight="182.0" prefWidth="302.0">
         <columns>
-            <TableColumn fx:id="name" minWidth="60.0" prefWidth="75.25" text="Name" />
-            <TableColumn fx:id="price" prefWidth="75.25" text="Price (€)" />
-            <TableColumn fx:id="nbItems" prefWidth="75.25" text="Stock" />
-         <TableColumn fx:id="discount" prefWidth="75.25" text="Discount" />
+            <TableColumn fx:id="name" minWidth="60.0" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="price" prefWidth="75.0" text="Price (€)" />
+            <TableColumn fx:id="nbItems" prefWidth="75.0" text="Stock" />
+         <TableColumn fx:id="discount" prefWidth="75.0" text="Discount" />
         </columns>
     </TableView>
     <TextField fx:id="cname" layoutX="27.0" layoutY="374.0" prefHeight="26.0" prefWidth="130.0" promptText="Name" />
