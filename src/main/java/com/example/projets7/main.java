@@ -15,10 +15,10 @@ public class main {
     public static void main(String[] args) {
 
 
-        Clothes product = new Clothes("clothes3", 1.0, 1.0, 1.0, 10, 36);
-        Clothes product1 = new Clothes("clothes2", 1.0, 1.0, 1.0, 10, 44);
-        Shoes product2 = new Shoes("shoe1", 1.0, 1.0, 1.0, 10, 42);
-        Shoes product3 = new Shoes("shoe2", 1.0, 1.0, 1.0, 10, 44);
+        Clothes product = new Clothes("clothes4", 1.0, 1.0, 1.0, 10, 36);
+        Clothes product1 = new Clothes("clothes5", 1.0, 1.0, 1.0, 10, 44);
+        Shoes product2 = new Shoes("shoe6", 1.0, 1.0, 1.0, 10, 42);
+        Shoes product3 = new Shoes("shoe7", 1.0, 1.0, 1.0, 10, 44);
 
 
         System.out.println(product);
@@ -30,14 +30,15 @@ public class main {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start a transaction
-            transaction = session.beginTransaction();
             // save the book objects
+            transaction = session.beginTransaction();
             session.persist(product);
             session.persist(product1);
             session.persist(product2);
             session.persist(product3);
-            // commit transaction
             transaction.commit();
+            // commit transaction
+
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -62,9 +63,11 @@ public class main {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
+            transaction = session.beginTransaction();
             for (Product item: books) {
                 session.remove(item);
             }
+            transaction.commit();
 
         } catch (Exception e) {
             System.out.println(e);
