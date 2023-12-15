@@ -38,8 +38,9 @@
    <Label fx:id="ccapital" layoutX="224.0" layoutY="81.0" text="Capital" />
    <Label fx:id="ccost" layoutX="363.0" layoutY="81.0" text="Cost" />
    <Label fx:id="cincome" layoutX="484.0" layoutY="81.0" text="Income" />
-   <Button fx:id="b_buy" layoutX="273.0" layoutY="317.0" mnemonicParsing="false" onAction="#OnBuy" text="Buy" />
+   <Button fx:id="b_buy" layoutX="319.0" layoutY="317.0" mnemonicParsing="false" onAction="#OnBuy" text="Buy" />
    <Button fx:id="b_sell" layoutX="487.0" layoutY="317.0" mnemonicParsing="false" onAction="#OnSell" text="Sell" />
-   <TextField fx:id="nbuy" layoutX="230.0" layoutY="317.0" prefHeight="26.0" prefWidth="35.0" />
-   <TextField fx:id="nsell" layoutX="442.0" layoutY="317.0" prefHeight="26.0" prefWidth="35.0" />
+   <TextField fx:id="nbuy" layoutX="273.0" layoutY="317.0" prefHeight="26.0" prefWidth="35.0" promptText="Nb" />
+   <TextField fx:id="nsell" layoutX="442.0" layoutY="317.0" prefHeight="26.0" prefWidth="35.0" promptText="Nb" />
+   <TextField fx:id="pbuy" layoutX="225.0" layoutY="317.0" prefHeight="26.0" prefWidth="35.0" promptText="P" />
 </AnchorPane>

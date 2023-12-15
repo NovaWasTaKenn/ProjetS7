@@ -63,12 +63,11 @@ public class HelloControllerAdam implements Initializable {
         name.setOnEditCommit(event ->  {
                 Product p = event.getRowValue();
                 p.setName(event.getNewValue());
-
         });
         price.setCellValueFactory(new PropertyValueFactory<Product, Double>("price"));
         price.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         price.setOnEditCommit(event ->  {
-                Product p=event.getRowValue();
+                Product p = event.getRowValue();
                 p.setPrice(event.getNewValue());
         });
         nbItems.setCellValueFactory(new PropertyValueFactory<Product, Integer>("nbItems"));
@@ -106,6 +105,9 @@ public class HelloControllerAdam implements Initializable {
 
     @FXML
     private TextField nsell;
+
+    @FXML
+    private TextField pbuy;
 
     @FXML
     private TextField nbuy;
@@ -250,11 +252,12 @@ public class HelloControllerAdam implements Initializable {
     void OnBuy(ActionEvent event) {
         try {
             Product selected = Table.getSelectionModel().getSelectedItem();
-            if (Integer.parseInt(nbuy.getText()) > 0) {
+            if (Integer.parseInt(nbuy.getText()) > 0 && Double.parseDouble(pbuy.getText())<selected.getPrice()) {
                 selected.setNbItems(selected.getNbItems() + Integer.parseInt(nbuy.getText()));
-                c.setGlobalCosts(c.getGlobalCost() + selected.getPrice() * Integer.parseInt(nbuy.getText()));
+                c.setGlobalCosts(c.getGlobalCost() + Double.parseDouble(pbuy.getText()) * Integer.parseInt(nbuy.getText()));
                 c.setCapital(c.getGlobalIncome() - c.getGlobalCost());
                 nbuy.clear();
+                pbuy.clear();
                 SetCompany();
                 Table.refresh();
             }
@@ -265,7 +268,7 @@ public class HelloControllerAdam implements Initializable {
             if(Table.getSelectionModel().getSelectedItem()==null) {
                 alert.setContentText("No item has been selected");
             }
-            else if (nbuy.getText().trim().isEmpty()){
+            else if (nbuy.getText().trim().isEmpty() || pbuy.getText().trim().isEmpty()){
                 alert.setContentText("Textfield is empty");
             }
             else{
